@@ -26,7 +26,7 @@ Public Class RollOfTheDiceListBox
         Dim returnedValue As Integer
         Dim header() = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}
 
-        'Rolls the set if die 1000 times
+        'Rolls the set of die 1000 times
         For rolls = 0 To 999
 
             'Sends the execution to the RollTheDice() function
@@ -66,21 +66,36 @@ Public Class RollOfTheDiceListBox
         Dim outputArray() = {two, three, four, five, six, seven, eight, nine, ten, eleven, twelve}
 
         '(Lines 69-81): Puts together the formatting for the output display
-        Console.WriteLine(StrDup(21, " ") & "Roll of The Dice")
-        Console.WriteLine(StrDup(55, "-"))
+        'Console.WriteLine(StrDup(21, " ") & "Roll of The Dice")
+        'Console.WriteLine(StrDup(55, "-"))
+
+        Dim headerRow As String = ""
 
         For Each letter In header
-            Console.Write(letter.PadLeft(4).PadRight(4) & "|")
+
+            'If headerRow = "" Then
+            headerRow += (CStr(letter) & " |").PadLeft(5)
+            'Else
+            '    (letter.PadLeft(4).PadRight(4) & "|")
+            'End If
         Next
 
-        Console.WriteLine()
-        Console.WriteLine(StrDup(55, "-"))
+        'Console.WriteLine()
+        'Console.WriteLine(StrDup(55, "-"))
 
+        Dim dataRow As String = ""
         For Each number In outputArray
-            Console.Write(CStr(number).PadLeft(4).PadRight(4) & "|")
+            ' Console.Write(CStr(number).PadLeft(4).PadRight(4) & "|")
+            dataRow += (CStr(number).PadLeft(5) & "|")
         Next
 
-        Console.Read()
+        DisplayListBox.Items.Add(StrDup(21, " ") & "Roll of The Dice")
+        DisplayListBox.Items.Add(StrDup(55, "-"))
+        DisplayListBox.Items.Add(headerRow)
+        DisplayListBox.Items.Add(StrDup(55, "-"))
+        DisplayListBox.Items.Add(dataRow)
+        DisplayListBox.Items.Add(StrDup(55, "-"))
+
     End Sub
 
     Function RollTheDice() As Integer
@@ -103,18 +118,19 @@ Public Class RollOfTheDiceListBox
     'Event handlers below this point
 
     'Listbox used as the output to display the rolled values
-    Private Sub OutputListBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles OutputListBox.SelectedIndexChanged
+    Private Sub DisplayListBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayListBox.SelectedIndexChanged
 
     End Sub
 
-    'Button used to call the Roll() sub
+    'Button used to clear the OutputDisplayListBox, then call the Roll() sub to fill it out again
     Private Sub RollButton_Click(sender As Object, e As EventArgs) Handles RollButton.Click
+        DisplayListBox.Items.Clear()
         Roll()
     End Sub
 
     'Button used to clear the output display
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
-        OutputListBox.Items.Clear()
+        DisplayListBox.Items.Clear()
     End Sub
 
     'Button used to exit the form

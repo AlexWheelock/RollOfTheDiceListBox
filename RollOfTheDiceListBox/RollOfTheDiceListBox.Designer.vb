@@ -22,19 +22,23 @@ Partial Class RollOfTheDiceListBox
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.OutputListBox = New System.Windows.Forms.ListBox()
+        Me.components = New System.ComponentModel.Container()
+        Me.DisplayListBox = New System.Windows.Forms.ListBox()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.RollButton = New System.Windows.Forms.Button()
+        Me.MainToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
-        'OutputListBox
+        'DisplayListBox
         '
-        Me.OutputListBox.FormattingEnabled = True
-        Me.OutputListBox.Location = New System.Drawing.Point(7, 48)
-        Me.OutputListBox.Name = "OutputListBox"
-        Me.OutputListBox.Size = New System.Drawing.Size(404, 186)
-        Me.OutputListBox.TabIndex = 0
+        Me.DisplayListBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DisplayListBox.FormattingEnabled = True
+        Me.DisplayListBox.ItemHeight = 18
+        Me.DisplayListBox.Location = New System.Drawing.Point(7, 48)
+        Me.DisplayListBox.Name = "DisplayListBox"
+        Me.DisplayListBox.Size = New System.Drawing.Size(404, 184)
+        Me.DisplayListBox.TabIndex = 0
         '
         'ExitButton
         '
@@ -71,15 +75,16 @@ Partial Class RollOfTheDiceListBox
         Me.Controls.Add(Me.RollButton)
         Me.Controls.Add(Me.ClearButton)
         Me.Controls.Add(Me.ExitButton)
-        Me.Controls.Add(Me.OutputListBox)
+        Me.Controls.Add(Me.DisplayListBox)
         Me.Name = "RollOfTheDiceListBox"
         Me.Text = "Roll of The Dice"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents OutputListBox As ListBox
+    Friend WithEvents DisplayListBox As ListBox
     Friend WithEvents ExitButton As Button
     Friend WithEvents ClearButton As Button
     Friend WithEvents RollButton As Button
+    Friend WithEvents MainToolTip As ToolTip
 End Class
