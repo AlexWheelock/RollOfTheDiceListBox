@@ -74,7 +74,7 @@ Public Class RollOfTheDiceListBox
         For Each letter In header
 
             'If headerRow = "" Then
-            headerRow += (CStr(letter) & " |").PadLeft(5)
+            headerRow += (CStr(letter) & "|").PadLeft(6)
             'Else
             '    (letter.PadLeft(4).PadRight(4) & "|")
             'End If
@@ -89,12 +89,12 @@ Public Class RollOfTheDiceListBox
             dataRow += (CStr(number).PadLeft(5) & "|")
         Next
 
-        DisplayListBox.Items.Add(StrDup(21, " ") & "Roll of The Dice")
-        DisplayListBox.Items.Add(StrDup(55, "-"))
+        DisplayListBox.Items.Add(StrDup(25, " ") & "Roll of The Dice")
+        DisplayListBox.Items.Add(StrDup(66, "-"))
         DisplayListBox.Items.Add(headerRow)
-        DisplayListBox.Items.Add(StrDup(55, "-"))
+        DisplayListBox.Items.Add(StrDup(66, "-"))
         DisplayListBox.Items.Add(dataRow)
-        DisplayListBox.Items.Add(StrDup(55, "-"))
+        DisplayListBox.Items.Add(StrDup(66, "-"))
 
     End Sub
 
@@ -113,6 +113,12 @@ Public Class RollOfTheDiceListBox
         'Returns the sum of the two randomly rolled die values
         Return rolledTotal
     End Function
+
+    Sub AboutMessage()
+        MsgBox("This form is used to simulate the rolling of two die." & vbCrLf _
+            & vbCrLf _
+               & "The numbers of the two die are then added together and the resulting number is then tracked. Pressing the " & Chr(34) & "Roll" & Chr(34) & " button will roll the die 1000 times and tally the results. The " & Chr(34) & "Clear" & Chr(34) & " button will clear the display. And the " & Chr(34) & "Exit" & Chr(34) & "button will close the form.")
+    End Sub
 
 
     'Event handlers below this point
@@ -136,5 +142,43 @@ Public Class RollOfTheDiceListBox
     'Button used to exit the form
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         Me.Close()
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
+        AboutMessage()
+    End Sub
+
+    Private Sub MenuTopMenuItem_Click(sender As Object, e As EventArgs) Handles MenuTopMenuItem.Click
+
+    End Sub
+
+    Private Sub RollTopMenuItem_Click(sender As Object, e As EventArgs) Handles RollTopMenuItem.Click
+        DisplayListBox.Items.Clear()
+        Roll()
+    End Sub
+
+    Private Sub ClearTopMenuItem_Click(sender As Object, e As EventArgs) Handles ClearTopMenuItem.Click
+        DisplayListBox.Items.Clear()
+    End Sub
+
+    Private Sub ExitTopMenuItem_Click(sender As Object, e As EventArgs) Handles ExitTopMenuItem.Click
+        Me.Close()
+    End Sub
+
+    Private Sub HelpTopMenuItem_Click(sender As Object, e As EventArgs) Handles HelpTopMenuItem.Click
+
+    End Sub
+
+    Private Sub MainContextMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MainContextMenuStrip.Opening
+
+    End Sub
+
+    Private Sub RunContextMenuItem_Click(sender As Object, e As EventArgs) Handles RunContextMenuItem.Click
+        DisplayListBox.Items.Clear()
+        Roll()
+    End Sub
+
+    Private Sub ClearContextMenuItem_Click(sender As Object, e As EventArgs) Handles ClearContextMenuItem.Click
+        DisplayListBox.Items.Clear()
     End Sub
 End Class
