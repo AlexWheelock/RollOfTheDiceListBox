@@ -10,7 +10,7 @@ Public Class RollOfTheDiceListBox
 
     Sub Roll()
 
-        'Dimming a variable for each potential result to put into outputArray() later
+        'Dims a variable for each potential result to put into outputArray() later
         Dim two As Integer
         Dim three As Integer
         Dim four As Integer
@@ -23,8 +23,11 @@ Public Class RollOfTheDiceListBox
         Dim eleven As Integer
         Dim twelve As Integer
 
+        'Variables for the rolled number, and the array for the header display
         Dim returnedValue As Integer
         Dim header() = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}
+        Dim headerRow As String = ""
+        Dim dataRow As String = ""
 
         'Rolls the set of die 1000 times
         For rolls = 0 To 999
@@ -65,30 +68,17 @@ Public Class RollOfTheDiceListBox
         'Organizes the numbered variables, and the number of times that they were rolled into an array
         Dim outputArray() = {two, three, four, five, six, seven, eight, nine, ten, eleven, twelve}
 
-        '(Lines 69-81): Puts together the formatting for the output display
-        'Console.WriteLine(StrDup(21, " ") & "Roll of The Dice")
-        'Console.WriteLine(StrDup(55, "-"))
-
-        Dim headerRow As String = ""
-
+        'Converts the header array into a string
         For Each letter In header
-
-            'If headerRow = "" Then
             headerRow += (CStr(letter) & "|").PadLeft(6)
-            'Else
-            '    (letter.PadLeft(4).PadRight(4) & "|")
-            'End If
         Next
 
-        'Console.WriteLine()
-        'Console.WriteLine(StrDup(55, "-"))
-
-        Dim dataRow As String = ""
+        'Converts the outputArray into a string
         For Each number In outputArray
-            ' Console.Write(CStr(number).PadLeft(4).PadRight(4) & "|")
             dataRow += (CStr(number).PadLeft(5) & "|")
         Next
 
+        'Formats the items in the DisplayListBox
         DisplayListBox.Items.Add(StrDup(25, " ") & "Roll of The Dice")
         DisplayListBox.Items.Add(StrDup(66, "-"))
         DisplayListBox.Items.Add(headerRow)
@@ -98,6 +88,8 @@ Public Class RollOfTheDiceListBox
 
     End Sub
 
+    'Function used to roll two die
+    'Takes two random integers from 1 to 6 and adds the two together, returns the sum.
     Function RollTheDice() As Integer
 
         Dim rolledNumber1 As Integer
@@ -114,10 +106,11 @@ Public Class RollOfTheDiceListBox
         Return rolledTotal
     End Function
 
+    'Displays a message box with the form information when the "About" button is pressed.
     Sub AboutMessage()
         MsgBox("This form is used to simulate the rolling of two die." & vbCrLf _
             & vbCrLf _
-               & "The numbers of the two die are then added together and the resulting number is then tracked. Pressing the " & Chr(34) & "Roll" & Chr(34) & " button will roll the die 1000 times and tally the results. The " & Chr(34) & "Clear" & Chr(34) & " button will clear the display. And the " & Chr(34) & "Exit" & Chr(34) & "button will close the form.")
+               & "The numbers of the two die are then added together and the resulting number is then tracked. Pressing the " & Chr(34) & "Roll" & Chr(34) & " button will roll the die 1000 times and tally the results. The " & Chr(34) & "Clear" & Chr(34) & " button will clear the display. And the " & Chr(34) & "Exit" & Chr(34) & " button will close the form.")
     End Sub
 
 
@@ -134,7 +127,7 @@ Public Class RollOfTheDiceListBox
         Roll()
     End Sub
 
-    'Button used to clear the output display
+    'Button used to clear the output display in the DisplayListBox
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
         DisplayListBox.Items.Clear()
     End Sub
@@ -144,40 +137,54 @@ Public Class RollOfTheDiceListBox
         Me.Close()
     End Sub
 
+    'The "About" button in the "Help" drop down menu in the TopMenuStrip.
+    'Pops up a MsgBox that tells the user what the form does.
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutTopMenuItem.Click
         AboutMessage()
     End Sub
 
+    'Drop down button in the TopMenuStrip, contains the "Roll", "Clear", and "Exit" TopMenuItems
     Private Sub MenuTopMenuItem_Click(sender As Object, e As EventArgs) Handles MenuTopMenuItem.Click
 
     End Sub
 
+    'The roll button hidden in the "Menu" drop down on top of the form.
+    'rolls the die 1000 times and displays the results in the DisplayListBox
     Private Sub RollTopMenuItem_Click(sender As Object, e As EventArgs) Handles RollTopMenuItem.Click
         DisplayListBox.Items.Clear()
         Roll()
     End Sub
 
+    'The clear button hidden in the "Menu" drop down on top of the form.
+    'clears the display shown in the DisplayListBox when pressed
     Private Sub ClearTopMenuItem_Click(sender As Object, e As EventArgs) Handles ClearTopMenuItem.Click
         DisplayListBox.Items.Clear()
     End Sub
 
+    'The exit button hidden in the "Menu" drop down on top of the form.
+    'closes the form when pressed
     Private Sub ExitTopMenuItem_Click(sender As Object, e As EventArgs) Handles ExitTopMenuItem.Click
         Me.Close()
     End Sub
 
+    'Help button shown on top of form, contains the "About" button
     Private Sub HelpTopMenuItem_Click(sender As Object, e As EventArgs) Handles HelpTopMenuItem.Click
 
     End Sub
 
+    'Context menu, contains the roll and clear buttons below
     Private Sub MainContextMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MainContextMenuStrip.Opening
 
     End Sub
 
-    Private Sub RunContextMenuItem_Click(sender As Object, e As EventArgs) Handles RunContextMenuItem.Click
+    'Roll button that appears in the context menu. Clears the DisplayListBox, then rolls the die 1000 times,
+    'updates DisplayListBox with new results
+    Private Sub RunContextMenuItem_Click(sender As Object, e As EventArgs) Handles RollContextMenuItem.Click
         DisplayListBox.Items.Clear()
         Roll()
     End Sub
 
+    'Clear button that appears in the context menu. Clears the display when pressed.
     Private Sub ClearContextMenuItem_Click(sender As Object, e As EventArgs) Handles ClearContextMenuItem.Click
         DisplayListBox.Items.Clear()
     End Sub

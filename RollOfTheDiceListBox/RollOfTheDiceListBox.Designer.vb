@@ -24,6 +24,9 @@ Partial Class RollOfTheDiceListBox
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.DisplayListBox = New System.Windows.Forms.ListBox()
+        Me.MainContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RollContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.ClearButton = New System.Windows.Forms.Button()
         Me.RollButton = New System.Windows.Forms.Button()
@@ -35,11 +38,8 @@ Partial Class RollOfTheDiceListBox
         Me.ExitTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutTopMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.RunContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClearContextMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TopMenuStrip.SuspendLayout()
         Me.MainContextMenuStrip.SuspendLayout()
+        Me.TopMenuStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'DisplayListBox
@@ -53,11 +53,32 @@ Partial Class RollOfTheDiceListBox
         Me.DisplayListBox.Name = "DisplayListBox"
         Me.DisplayListBox.Size = New System.Drawing.Size(622, 220)
         Me.DisplayListBox.TabIndex = 0
+        Me.DisplayListBox.TabStop = False
         Me.MainToolTip.SetToolTip(Me.DisplayListBox, "Displayed Output")
+        '
+        'MainContextMenuStrip
+        '
+        Me.MainContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RollContextMenuItem, Me.ClearContextMenuItem})
+        Me.MainContextMenuStrip.Name = "ContextMenuStrip1"
+        Me.MainContextMenuStrip.Size = New System.Drawing.Size(113, 52)
+        '
+        'RollContextMenuItem
+        '
+        Me.RollContextMenuItem.Name = "RollContextMenuItem"
+        Me.RollContextMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.RollContextMenuItem.Text = "Roll"
+        '
+        'ClearContextMenuItem
+        '
+        Me.ClearContextMenuItem.Name = "ClearContextMenuItem"
+        Me.ClearContextMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.ClearContextMenuItem.Text = "Clear"
         '
         'ExitButton
         '
         Me.ExitButton.ContextMenuStrip = Me.MainContextMenuStrip
+        Me.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ExitButton.Location = New System.Drawing.Point(495, 264)
         Me.ExitButton.Margin = New System.Windows.Forms.Padding(4)
         Me.ExitButton.Name = "ExitButton"
@@ -97,7 +118,7 @@ Partial Class RollOfTheDiceListBox
         Me.TopMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuTopMenuItem, Me.HelpTopMenuItem})
         Me.TopMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.TopMenuStrip.Name = "TopMenuStrip"
-        Me.TopMenuStrip.Size = New System.Drawing.Size(648, 30)
+        Me.TopMenuStrip.Size = New System.Drawing.Size(648, 28)
         Me.TopMenuStrip.TabIndex = 4
         Me.TopMenuStrip.Text = "TopMenuStrip"
         '
@@ -139,29 +160,12 @@ Partial Class RollOfTheDiceListBox
         Me.AboutTopMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.AboutTopMenuItem.Text = "&About"
         '
-        'MainContextMenuStrip
-        '
-        Me.MainContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MainContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunContextMenuItem, Me.ClearContextMenuItem})
-        Me.MainContextMenuStrip.Name = "ContextMenuStrip1"
-        Me.MainContextMenuStrip.Size = New System.Drawing.Size(113, 52)
-        '
-        'RunContextMenuItem
-        '
-        Me.RunContextMenuItem.Name = "RunContextMenuItem"
-        Me.RunContextMenuItem.Size = New System.Drawing.Size(112, 24)
-        Me.RunContextMenuItem.Text = "Run"
-        '
-        'ClearContextMenuItem
-        '
-        Me.ClearContextMenuItem.Name = "ClearContextMenuItem"
-        Me.ClearContextMenuItem.Size = New System.Drawing.Size(112, 24)
-        Me.ClearContextMenuItem.Text = "Clear"
-        '
         'RollOfTheDiceListBox
         '
+        Me.AcceptButton = Me.RollButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.ExitButton
         Me.ClientSize = New System.Drawing.Size(648, 333)
         Me.ContextMenuStrip = Me.MainContextMenuStrip
         Me.Controls.Add(Me.RollButton)
@@ -173,9 +177,9 @@ Partial Class RollOfTheDiceListBox
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "RollOfTheDiceListBox"
         Me.Text = "Roll of The Dice"
+        Me.MainContextMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.ResumeLayout(False)
         Me.TopMenuStrip.PerformLayout()
-        Me.MainContextMenuStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -194,6 +198,6 @@ Partial Class RollOfTheDiceListBox
     Friend WithEvents RollTopMenuItem As ToolStripMenuItem
     Friend WithEvents ClearTopMenuItem As ToolStripMenuItem
     Friend WithEvents ExitTopMenuItem As ToolStripMenuItem
-    Friend WithEvents RunContextMenuItem As ToolStripMenuItem
+    Friend WithEvents RollContextMenuItem As ToolStripMenuItem
     Friend WithEvents ClearContextMenuItem As ToolStripMenuItem
 End Class
